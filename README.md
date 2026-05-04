@@ -1,16 +1,15 @@
 # 🥃 bopang
 
-基于 [NoneBot2](https://nonebot.dev/) 的多功能 QQ 机器人，支持 AI 对话、知识库管理、Pixiv 搜图、ComfyUI 绘图等功能。
+基于 [NoneBot2](https://nonebot.dev/) 的多功能 QQ 机器人，支持 AI 对话、知识库管理、命令式娱乐(Pixiv 搜图、ComfyUI 绘图等)功能。
 
 ## ✨ 功能
 
-- **AI 对话** — 基于 DeepSeek 的群聊/私聊对话，支持上下文记忆
+- **多模态AI 对话** — 基于 DeepSeek 的群聊/私聊对话，支持上下文记忆、长期知识记忆、视觉多模态
+- **AI模拟群聊** — 基于 DeepSeek 核心、多层识别算法的的群聊模拟
 - **知识库** — FAISS 向量检索，支持导入/搜索/删除/管理（带 GUI 工具）
-- **视觉识别** — 豆包视觉模型，图片内容理解
-- **Pixiv 搜图** — 热门/插画/漫画搜索
-- **ComfyUI 绘图** — 文生图，支持多种分辨率
-- **今日担当** — 每日随机角色
+- **今日担当** — 每日随机马娘角色
 - **SauceNAO 识图** — 以图搜源
+- **命令式娱乐功能** — comfyui\pixiv搜图等
 
 ## 🚀 快速开始
 
@@ -18,10 +17,12 @@
 
 - Python >= 3.9
 - pip
+- nonebot脚手架(nb cli)
 
 ### 配置
 
-编辑项目根目录下的 `.env` 文件，填写你的 API Key：
+将.env.example改为.env配置文件
+编辑 `.env` 文件，填写你的 API Key：
 
 ```ini
 # DeepSeek (AI 对话，必填)
@@ -30,7 +31,7 @@ AICHATKEY1=sk-your-key-here
 # 豆包 (视觉识别)
 VIRSIONKEY1=your-doubao-key
 
-# Bing 搜索
+# Bing 搜索（可填写其他AI搜索API，推荐博查API）
 BINGSEARCHKEY1=your-bing-key
 
 # SauceNAO (识图)
@@ -46,23 +47,12 @@ PIXIV_REFRESH_TOKEN=your-pixiv-token
 
 **启动机器人：**
 
-```bash
-# Windows
-.venv\Scripts\python bot.py
-
-# Linux / macOS
-.venv/bin/python bot.py
-```
-
-或使用 NoneBot CLI：
+使用 NoneBot CLI：
 
 ```bash
 # Windows
-.venv\Scripts\activate && nb run
-
-# Linux / macOS
-source .venv/bin/activate && nb run
-```
+cd 你的项目目录
+nb run
 
 **启动知识库管理工具（GUI）：**
 
@@ -103,6 +93,7 @@ bopang/
 │           │   ├── comfyui.py    # ComfyUI 绘图
 │           │   ├── dailywife.py  # 今日担当
 │           │   ├── image_search.py # SauceNAO 识图
+├                ── settime_message.py # 定时消息
 │           │   └── pixiv.py      # Pixiv 搜图
 │           ├── admin/       # 管理员命令
 │           └── utils/       # 工具函数
@@ -113,29 +104,26 @@ bopang/
 └── images/                   # 图片存储（自动创建）
 ```
 
-## ⚙️ 手动安装
-
-如果你不想使用一键安装脚本：
+## ⚙️ 安装依赖
 
 ```bash
-# 1. 创建虚拟环境
+# 1. 进入nonebot脚手架创建的虚拟环境
 python -m venv .venv
 
-# 2. 激活虚拟环境
 # Windows:
 .venv\Scripts\activate
 # Linux / macOS:
 source .venv/bin/activate
 
-# 3. 安装依赖
+# 2. 安装依赖
 pip install -r requirements.txt
 
-# 4. 配置环境变量
-cp .env.example .env
+# 3. 配置环境变量
+
 # 编辑 .env 填写 API Key
 
-# 5. 运行
-python bot.py
+# 4. 运行
+nb run
 ```
 
 ## 📄 License
