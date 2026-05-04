@@ -1,0 +1,56 @@
+[project]
+name = "bopang"
+version = "1.0.0"
+description = "bopang"
+readme = "README.md"
+requires-python = ">=3.9, <3.14.0"
+dependencies = [
+    "nonebot2[fastapi]>=2.4.4",
+    "nonebot-adapter-onebot>=2.4.6",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pyright[nodejs]",
+    "ruff"
+]
+
+[tool.nonebot]
+plugin_dirs = ["bopang/plugins"]
+builtin_plugins = ["echo"]
+
+[tool.nonebot.adapters]
+nonebot-adapter-onebot = [
+    { name = "OneBot V11", module_name = "nonebot.adapters.onebot.v11" }
+]
+
+[tool.nonebot.plugins]
+"@local" = []
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = [
+    "F", "W", "E", "I", "C90", "N", "PL", "UP", "YTT",
+    "ANN", "ASYNC", "BLE", "FBT", "B", "A", "COM", "C4",
+    "DTZ", "T10", "ICN", "PIE", "T20", "PYI", "Q", "RSE",
+    "RET", "SIM", "SLOT", "TID", "TC", "ARG", "PTH",
+    "FAST", "PERF", "PGH", "FURB", "TRY", "RUF",
+]
+ignore = [
+    "E402", "B008", "UP037", "ANN202", "ANN401",
+    "COM812", "PLC0415",
+]
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.pyright]
+pythonVersion = "3.9"
+pythonPlatform = "All"
+typeCheckingMode = "standard"
